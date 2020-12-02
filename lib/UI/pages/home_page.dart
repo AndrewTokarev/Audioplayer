@@ -14,66 +14,68 @@ class MyHomePageState extends State<MyHomePage> {
   double currentSliderValue = 0;
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerMain(selected: "player"),
-      appBar: AppBar(
-        title: Text(Strings.music),
-      ),
-      body: Padding(
-          padding: EdgeInsets.only(top: 100),
-          child: Column(
-            children: <Widget>[
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (_) => InfoPage()));
-                  },
-                  child: Hero(
-                      tag: "logo",
-                      child: Image.asset(ImageAssets.audio_znak,
-                          width: 200, height: 200))),
-              /*Image.network('https://bibl-omut.ru/images/img/audioznak.png',
+        drawer: DrawerMain(selected: "player"),
+        appBar: AppBar(
+          title: Text(Strings.music),
+        ),
+        body:
+            Padding(padding: EdgeInsets.only(top: 100), child: _buildColumn()));
+  }
+
+  Widget _buildColumn() {
+    return Column(
+      children: <Widget>[
+        GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (_) => InfoPage()));
+            },
+            child: Hero(
+                tag: "logo",
+                child: Image.asset(ImageAssets.audio_znak,
+                    width: 200, height: 200))),
+        /*Image.network('https://bibl-omut.ru/images/img/audioznak.png',
                   width: 200, height: 200),*/
-              Container(
-                padding: EdgeInsets.only(top: 150),
-                child: Slider(
-                  value: currentSliderValue,
-                  activeColor: Colors.black,
-                  inactiveColor: Colors.grey[350],
-                  min: 0,
-                  max: 100,
-                  divisions: 100,
-                  label: currentSliderValue.round().toString(),
-                  onChanged: (double value) {
-                    setState(() {
-                      currentSliderValue = value;
-                    });
-                  },
+        Container(
+          padding: EdgeInsets.only(top: 150),
+          child: Slider(
+            value: currentSliderValue,
+            activeColor: Colors.black,
+            inactiveColor: Colors.grey[350],
+            min: 0,
+            max: 100,
+            divisions: 100,
+            label: currentSliderValue.round().toString(),
+            onChanged: (double value) {
+              setState(() {
+                currentSliderValue = value;
+              });
+            },
+          ),
+        ),
+        Container(
+            padding: EdgeInsets.only(top: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  iconSize: 65,
+                  icon: Icon(Icons.fast_rewind),
+                  onPressed: () {},
                 ),
-              ),
-              Container(
-                  padding: EdgeInsets.only(top: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      IconButton(
-                        iconSize: 65,
-                        icon: Icon(Icons.fast_rewind),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        iconSize: 65,
-                        icon: Icon(Icons.play_arrow),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        iconSize: 65,
-                        icon: Icon(Icons.fast_forward),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ))
-            ],
-          )),
+                IconButton(
+                  iconSize: 65,
+                  icon: Icon(Icons.play_arrow),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  iconSize: 65,
+                  icon: Icon(Icons.fast_forward),
+                  onPressed: () {},
+                ),
+              ],
+            ))
+      ],
     );
   }
 }
